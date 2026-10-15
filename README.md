@@ -134,6 +134,15 @@ These are the currently available resources and their respective operations. Lis
 - Merge
 - Find Duplicates
 - Update Profile Picture
+- Get Properties
+- Set Properties
+
+### Contact Property
+
+- List
+- Create
+- Update
+- Delete
 
 ### Conversation
 
