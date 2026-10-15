@@ -1,5 +1,9 @@
 import { HttpClient } from '@devantage/n8n-custom-nodes-framework';
-import type { IDataObject } from 'n8n-workflow';
+import type { IDataObject, IN8nHttpFullResponse } from 'n8n-workflow';
+
+export type HttpResponse<D> = Omit<IN8nHttpFullResponse, 'body'> & {
+  body: D;
+};
 
 export const CHATJURIDICO_CREDENTIAL_TYPE: string = 'chatJuridicoApi';
 

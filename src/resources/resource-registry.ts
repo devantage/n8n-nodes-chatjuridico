@@ -9,6 +9,7 @@ import { AsaasIntegrationResource } from './asaas-integration';
 import { AutomationResource } from './automation';
 import { CampaignResource } from './campaign';
 import { ContactResource } from './contact';
+import { ContactPropertyResource } from './contact-property';
 import { ConversationResource } from './conversation';
 import { DraftResource } from './draft';
 import { FaqResource } from './faq';
@@ -44,6 +45,7 @@ export const resourceRegistry: ResourceRegistry = new ResourceRegistry(
   new AutomationResource(),
   new CampaignResource(),
   new ContactResource(),
+  new ContactPropertyResource(),
   new ConversationResource(),
   new DraftResource(),
   new FunnelResource(),

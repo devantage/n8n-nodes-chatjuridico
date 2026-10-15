@@ -71,7 +71,7 @@ describe('ChatJuridico node', (): void => {
       },
     ]);
     expect(node.description.properties[0].name).toBe('resource');
-    expect(node.description.properties[0].options).toHaveLength(30);
+    expect(node.description.properties[0].options).toHaveLength(31);
   });
 
   it('lists the resources alphabetically', (): void => {

@@ -5,8 +5,10 @@ import { CreateOperation } from './create';
 import { DeleteOperation } from './delete';
 import { FindDuplicatesOperation } from './find-duplicates';
 import { GetOperation } from './get';
+import { GetPropertiesOperation } from './get-properties';
 import { ListOperation } from './list';
 import { MergeOperation } from './merge';
+import { SetPropertiesOperation } from './set-properties';
 import { UpdateOperation } from './update';
 import { UpdateProfilePictureOperation } from './update-profile-picture';
 
@@ -23,6 +25,8 @@ describe('ContactResource', (): void => {
     ['merge', MergeOperation],
     ['findDuplicates', FindDuplicatesOperation],
     ['updateProfilePicture', UpdateProfilePictureOperation],
+    ['getProperties', GetPropertiesOperation],
+    ['setProperties', SetPropertiesOperation],
   ])(
     'registers the %s operation',
     (

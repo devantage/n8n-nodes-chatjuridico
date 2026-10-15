@@ -2,6 +2,10 @@ import { ResourceNode } from '@devantage/n8n-custom-nodes-framework';
 import type { INodeType } from 'n8n-workflow';
 
 import { resourceRegistry } from '../resources';
+import {
+  getContactPropertyIdOptions,
+  getContactPropertyOptions,
+} from '../resources/contact-property';
 import { getFunnelOptions } from '../resources/funnel';
 import { getFunnelStageOptions } from '../resources/funnel-stage';
 import { getInstanceOptions } from '../resources/instance';
@@ -12,6 +16,8 @@ import { CHATJURIDICO_CREDENTIAL_TYPE } from '../utils';
 export class ChatJuridico extends ResourceNode {
   public readonly methods: INodeType['methods'] = {
     loadOptions: {
+      getContactPropertyIdOptions,
+      getContactPropertyOptions,
       getFunnelOptions,
       getFunnelStageOptions,
       getInstanceOptions,
