@@ -22,11 +22,34 @@ describe('contact property value operations', (): void => {
     {
       label: 'gets the property values of a contact',
       operation: new GetPropertiesOperation('contact'),
-      parameters: { contactId: 'contact-1' },
+      parameters: { contactId: 'contact-1', returnAsJson: false },
       method: 'get',
       response: { data: [{ key: 'beneficio', value: 'aposentadoria' }] },
       expectedRequest: ['contacts/contact-1/properties'],
-      expectedJson: { data: [{ key: 'beneficio', value: 'aposentadoria' }] },
+      expectedJson: [{ key: 'beneficio', value: 'aposentadoria' }],
+    },
+    {
+      label: 'gets the property values of a contact as JSON',
+      operation: new GetPropertiesOperation('contact'),
+      parameters: { contactId: 'contact-1', returnAsJson: true },
+      method: 'get',
+      response: {
+        data: [
+          { key: 'beneficio', value: 'aposentadoria' },
+          { key: 'valor', value: 10 },
+        ],
+      },
+      expectedRequest: ['contacts/contact-1/properties'],
+      expectedJson: { beneficio: 'aposentadoria', valor: 10 },
+    },
+    {
+      label: 'keeps a non-array response when returning as JSON',
+      operation: new GetPropertiesOperation('contact'),
+      parameters: { contactId: 'contact-1', returnAsJson: true },
+      method: 'get',
+      response: { data: { beneficio: 'aposentadoria' } },
+      expectedRequest: ['contacts/contact-1/properties'],
+      expectedJson: { beneficio: 'aposentadoria' },
     },
     {
       label: 'sets property values picked as fields',
