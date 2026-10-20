@@ -1,5 +1,6 @@
 import { ResourceOperation } from '@devantage/n8n-custom-nodes-framework';
 import type {
+  IDataObject,
   IExecuteFunctions,
   INodeExecutionData,
   INodeProperties,
@@ -23,7 +24,17 @@ export class GetPropertiesOperation extends ResourceOperation {
   public readonly properties: INodeProperties[] = withOperationDisplayOptions(
     this.resource,
     this.name,
-    [contactIdProperty],
+    [
+      contactIdProperty,
+      {
+        name: 'returnAsJson',
+        displayName: 'Return as JSON',
+        description: 'Return properties as a JSON instead of an array',
+        type: 'boolean',
+        required: false,
+        default: false,
+      },
+    ],
   );
 
   public async execute(
@@ -35,13 +46,30 @@ export class GetPropertiesOperation extends ResourceOperation {
       itemIndex,
     ) as string;
 
+    const returnAsJson: boolean = this.getNodeParameter(
+      'returnAsJson',
+      itemIndex,
+    ) as boolean;
+
     const response: ApiResponse = await httpClient.get<ApiResponse>(
       this,
       `contacts/${contactId}/properties`,
     );
 
+    let responseData: IDataObject = response.data;
+
+    if (returnAsJson && Array.isArray(responseData)) {
+      responseData = responseData.reduce(
+        (previous: IDataObject, current: IDataObject) => ({
+          ...previous,
+          [current.key as string]: current.value,
+        }),
+        {},
+      ) as IDataObject;
+    }
+
     return {
-      json: response,
+      json: responseData,
       pairedItem: itemIndex,
     };
   }
